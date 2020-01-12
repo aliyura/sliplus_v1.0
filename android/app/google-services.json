@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "452498326202",
+    "firebase_url": "https://sliplus.firebaseio.com",
+    "project_id": "sliplus",
+    "storage_bucket": "sliplus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452498326202:android:ab09cbc20fffd74bd07883",
+        "android_client_info": {
+          "package_name": "com.rabsdeveloper.sliplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452498326202-pdjbe0v2hocgejtj6r5i8gpbnsrosha9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKsAk48HGil4U6EYF4CcqYGvIFVTVdL5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452498326202-pdjbe0v2hocgejtj6r5i8gpbnsrosha9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
