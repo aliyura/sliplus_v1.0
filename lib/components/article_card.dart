@@ -50,11 +50,10 @@ class _ArticleCardState extends State<ArticleCard> {
     double grid3Width = MediaQuery.of(context).size.width / 3 - 24;
 
     return Container(
-      padding:
-          EdgeInsets.only(top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
+      padding:EdgeInsets.only(top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
       margin: EdgeInsets.only(top: 15, bottom: 10, left:10,right: 10),
       decoration: BoxDecoration(
-          color: AppTheme.nearlyWhite,
+          color: AppTheme.white,
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(

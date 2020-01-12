@@ -86,6 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.only(top: 8, left: 4),
             color: AppTheme.nearlyWhite,
             height: MediaQuery.of(context).size.height / 2.5,
+            margin: EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
                 Container(
