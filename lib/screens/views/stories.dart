@@ -26,7 +26,7 @@ class _StoriesScreenState extends State<StoriesScreen> {
       child:ListView(
         shrinkWrap: true,
         children: <Widget>[
-            //ArticleCard(article: dummy.singleArticle),
+            ArticleCard(article: dummy.singleArticle),
             ArticleCard(article: dummy.oneArticle),
             ArticleCard(article: dummy.twoArticle),
             ArticleCard(article: dummy.threeArticle),

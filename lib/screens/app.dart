@@ -57,23 +57,23 @@ class _AppScreenState extends State<AppScreen>
         backgroundColor: AppTheme.background,
         appBar: AppBar(
           backgroundColor: AppTheme.white,
-          iconTheme: IconThemeData(color:  AppTheme.nearlyBlack),
+          iconTheme: IconThemeData(color:  AppTheme.nearlyDarkBlue),
       
           title: Text(
             AppTheme.appName,
-            style: TextStyle(color:  AppTheme.nearlyBlack),
+            style: TextStyle(color:  AppTheme.nearlyDarkBlue),
           ),
           actions: <Widget>[
             FlatButton.icon(
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.library_books, color: AppTheme.nearlyBlack),
+                icon: Icon(Icons.library_books, color: AppTheme.nearlyDarkBlue),
                 label: Text(''),
                 onPressed: () {
                   
                 }),
             FlatButton.icon(
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.notifications, color:  AppTheme.nearlyBlack),
+                icon: Icon(Icons.notifications, color:  AppTheme.nearlyDarkBlue),
                 label: Text(''),
                 onPressed: () {}),
           ],

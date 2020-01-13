@@ -1,3 +1,16 @@
+Map<String, dynamic>  articleComment={
+   "id": '23456789098765',
+   "user":{
+       "uid": "123",
+       "name": "Rabs Developer",
+       "photo": "assets/images/avatar.jpg",
+       "location": "Abuja, Nigeria",
+       "isAnounymus": true
+   },
+   "body": 'Where does it come from Where does it come from Where does it come from',
+   "publisgedDat": '12 Minutes Ago'
+};
+
 Map<String, dynamic>  userSearchResponse={
   "uid": "123",
   "name": "Rabs Developer",

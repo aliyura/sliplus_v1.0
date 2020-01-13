@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sliplus/components/themes.dart';
-import 'package:sliplus/screens/comment.dart';
 import 'package:sliplus/screens/preview.dart';
 
-class ArticleCard extends StatefulWidget {
+class FlatArticleCard extends StatefulWidget {
   Map<String, dynamic> article;
-  ArticleCard({@required this.article});
+  FlatArticleCard({@required this.article});
 
   @override
-  _ArticleCardState createState() => _ArticleCardState();
+  _FlatArticleCardState createState() => _FlatArticleCardState();
 }
 
-class _ArticleCardState extends State<ArticleCard> {
+class _FlatArticleCardState extends State<FlatArticleCard> {
   dynamic id, images, title, body, category, likes, comments, publisgedDat;
   dynamic uid, name, photo, location, isAnounymus;
   Map<String, dynamic> article;
@@ -54,17 +53,9 @@ class _ArticleCardState extends State<ArticleCard> {
     return Container(
       padding:
           EdgeInsets.only(top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
-      margin: EdgeInsets.only(top: 15, bottom: 10, left: 10, right: 10),
       decoration: BoxDecoration(
-          color: AppTheme.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              offset: Offset(0, 2.0),
-              blurRadius: 20.0,
-            )
-          ]),
+        color: AppTheme.white,
+      ),
       child: Column(
         children: <Widget>[
           Container(
@@ -291,70 +282,6 @@ class _ArticleCardState extends State<ArticleCard> {
                     )
                   ],
                 ),
-          Container(
-            alignment: Alignment.centerRight,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          '$likes',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text('Likes'),
-                        SizedBox(width: 20),
-                        InkWell(
-                          child: SizedBox(
-                            child: Wrap(children: [
-                              Text(
-                                '$comments',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text('Comments'),
-                            ]),
-                          ),
-                          onTap: (){
-                            Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          CommentScreen(article: article)));
-              
-                          },
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: InkWell(
-                            child: Icon(
-                              Icons.comment,
-                              size: 25,
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          CommentScreen(article: article)));
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: Icon(
-                            Icons.favorite,
-                            size: 25,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:sliplus/components/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:sliplus/config.dart' as config;
 
 class PreviewScreen extends StatefulWidget {
   Map<String, dynamic> article;
@@ -11,19 +13,16 @@ class PreviewScreen extends StatefulWidget {
 }
 
 class _PreviewScreenState extends State<PreviewScreen> {
+  ScrollController _scrollController = new ScrollController();
   dynamic id, images, title, body, category, likes, comments, publisgedDat;
   dynamic uid, name, photo, location, isAnounymus;
   final Widget placeholder = Container(color: Colors.grey);
   Map<String, dynamic> article;
-
-  final List<String> imgList = [
-    'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-    'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-    'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-    'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-    'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
-  ];
+  Color backgroundColor = AppTheme.nearlyBlue;
+  Color fontColor = AppTheme.white;
+  TextAlign textAlign = TextAlign.justify;
+  double fontSize = 16;
+  double scroll = 0.0;
 
   @override
   void initState() {
@@ -55,6 +54,68 @@ class _PreviewScreenState extends State<PreviewScreen> {
     isAnounymus = article['user']['isAnounymus'];
   }
 
+  void alert(message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(config.appName),
+          content: Text(message),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showColorDialog() {
+    Color selectedColor;
+
+    showDialog(
+      context: context,
+      child: AlertDialog(
+        title: const Text('Pick a color!'),
+        content: SingleChildScrollView(
+          child: ColorPicker(
+            pickerColor: backgroundColor,
+            onColorChanged: (color) {
+              setState(() {
+                selectedColor = color;
+              });
+            },
+            enableLabel: true,
+            pickerAreaHeightPercent: 0.8,
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            child: const Text('Apply'),
+            onPressed: () {
+              setState(() {
+                if (selectedColor != null) {
+                  backgroundColor = selectedColor;
+
+                  if (backgroundColor != AppTheme.white) {
+                    fontColor = AppTheme.nearlyWhite;
+                  } else {
+                    fontColor = AppTheme.nearlyBlack;
+                  }
+                }
+              });
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<T> map<T>(List list, Function handler) {
@@ -62,19 +123,18 @@ class _PreviewScreenState extends State<PreviewScreen> {
       for (var i = 0; i < list.length; i++) {
         result.add(handler(i, list[i]));
       }
-
       return result;
     }
 
     final List items = map<Widget>(
-      imgList,
+      images,
       (index, i) {
         return Container(
           margin: EdgeInsets.all(5.0),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
             child: Stack(children: <Widget>[
-              Image.network(i, fit: BoxFit.cover, width: 1000.0),
+              Image.asset(i, fit: BoxFit.cover, width: 1000.0),
               Positioned(
                 bottom: 0.0,
                 left: 0.0,
@@ -111,58 +171,198 @@ class _PreviewScreenState extends State<PreviewScreen> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: AppTheme.white,
         iconTheme: IconThemeData(color: AppTheme.nearlyBlue),
-        title: Text('Preview', style: TextStyle(color: AppTheme.nearlyBlue)),
+        title: Text(title, style: TextStyle(color: AppTheme.nearlyBlue)),
         actions: <Widget>[
-          
-          SizedBox(width: 30,),
-            Icon(Icons.remove),
-            SizedBox(width: 40,),
-            Icon(Icons.plus_one),
-            SizedBox(width: 30,),
-            
+          SizedBox(
+            width: 20,
+          ),
+          InkWell(
+            child: Icon(Icons.remove),
+            onTap: () {
+              if (fontSize > 16) {
+                setState(() {
+                  fontSize -= 5;
+                });
+              }
+            },
+            onLongPress: () {
+              setState(() {
+                fontSize = 16;
+              });
+            },
+          ),
+          SizedBox(
+             width: 30,
+          ),
+          InkWell(
+            child: Icon(Icons.plus_one),
+            onTap: () {
+              setState(() {
+                fontSize += 5;
+              });
+            },
+            onLongPress: () {
+              setState(() {
+                fontSize += 10;
+              });
+            },
+          ),
+          SizedBox(
+            width: 20,
+          ),
         ],
       ),
       body: Container(
         color: AppTheme.nearlyWhite,
+        padding: EdgeInsets.only(bottom: 15),
         child: SafeArea(
             top: false,
             child: Column(
               children: <Widget>[
-
-                Container(
-                  child: CarouselSlider(
-                    items: items,
-                    height: MediaQuery.of(context).size.height / 3,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    pauseAutoPlayOnTouch: Duration(seconds: 10),
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-
                 Container(
                   width: double.infinity,
-                  height: MediaQuery.of(context).size.height/1.9,
-                  child: ListView(
+                  decoration: BoxDecoration(
+                    color: AppTheme.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        offset: Offset(0, 2.0),
+                        blurRadius: 20.0,
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.all(15),
+                  child: Wrap(
                     children: <Widget>[
-
+                      InkWell(
+                        child: Icon(Icons.format_indent_decrease,
+                            color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          setState(() {
+                            textAlign = TextAlign.left;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 20),
+                      InkWell(
+                        child: Icon(Icons.format_align_center,
+                            color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          setState(() {
+                            textAlign = TextAlign.center;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 20),
+                      InkWell(
+                        child: Icon(Icons.format_align_justify,
+                            color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          setState(() {
+                            textAlign = TextAlign.justify;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 20),
+                      InkWell(
+                        child: Icon(Icons.format_indent_increase,
+                            color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          setState(() {
+                            textAlign = TextAlign.right;
+                          });
+                        },
+                      ),
+                      SizedBox(width: 20),
+                      InkWell(
+                        child:
+                            Icon(Icons.color_lens, color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          showColorDialog();
+                        },
+                      ),
+                      SizedBox(width: 20),
+                      InkWell(
+                        child: Icon(Icons.arrow_upward,
+                            color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          scroll = scroll - 30;
+                          _scrollController.animateTo(
+                            scroll,
+                            curve: Curves.easeOut,
+                            duration: const Duration(milliseconds: 300),
+                          );
+                        },
+                        onLongPress: () {
+                          scroll = scroll - 30;
+                          _scrollController.animateTo(
+                            scroll,
+                            curve: Curves.easeOut,
+                            duration: const Duration(milliseconds: 300),
+                          );
+                        },
+                      ),
+                      SizedBox(width: 20),
+                      InkWell(
+                        child: Icon(Icons.arrow_downward,
+                            color: AppTheme.nearlyBlack),
+                        onTap: () {
+                          scroll = scroll + 30;
+                          _scrollController.animateTo(
+                            scroll,
+                            curve: Curves.easeOut,
+                            duration: const Duration(milliseconds: 300),
+                          );
+                        },
+                        onLongPress: () {
+                          scroll = scroll + 30;
+                          _scrollController.animateTo(
+                            scroll,
+                            curve: Curves.easeOut,
+                            duration: const Duration(milliseconds: 300),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: images.length > 0
+                      ? CarouselSlider(
+                          items: items,
+                          height: MediaQuery.of(context).size.height / 3,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          pauseAutoPlayOnTouch: Duration(seconds: 10),
+                          enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        )
+                      : SizedBox(),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height / 1.3,
+                  child: ListView(
+                    controller: _scrollController,
+                    children: <Widget>[
                       Container(
                         padding: EdgeInsets.only(
                             top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
                         margin: EdgeInsets.only(
-                            top: 2, bottom: 10, left: 10, right: 10),
+                            top: 10, bottom: 10, left: 10, right: 10),
                         decoration: BoxDecoration(
-                            color: AppTheme.white,
+                            color: backgroundColor,
                             borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
@@ -173,17 +373,18 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             ]),
                         child: Text(
                           title,
+                          textAlign: textAlign,
                           style: TextStyle(
-                              fontSize: 22.0, fontWeight: FontWeight.w500),
+                              fontSize: 25.0,
+                              color: fontColor,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
-
-                        Container(
+                      Container(
                         padding: EdgeInsets.only(
                             top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
-                      
                         decoration: BoxDecoration(
-                            color: AppTheme.white,
+                            color: backgroundColor,
                             borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
@@ -194,7 +395,9 @@ class _PreviewScreenState extends State<PreviewScreen> {
                             ]),
                         child: Text(
                           body,
-                          style: TextStyle(color: AppTheme.darkText),
+                          textAlign: textAlign,
+                          style:
+                              TextStyle(color: fontColor, fontSize: fontSize),
                         ),
                       ),
                     ],
