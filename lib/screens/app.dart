@@ -56,24 +56,24 @@ class _AppScreenState extends State<AppScreen>
       child: Scaffold(
         backgroundColor: AppTheme.background,
         appBar: AppBar(
-          backgroundColor: AppTheme.nearlyBlue,
-          iconTheme: IconThemeData(color:  AppTheme.white),
-          
+          backgroundColor: AppTheme.white,
+          iconTheme: IconThemeData(color:  AppTheme.nearlyBlack),
+      
           title: Text(
             AppTheme.appName,
-            style: TextStyle(color:  AppTheme.white),
+            style: TextStyle(color:  AppTheme.nearlyBlack),
           ),
           actions: <Widget>[
             FlatButton.icon(
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.library_books, color: AppTheme.white),
+                icon: Icon(Icons.library_books, color: AppTheme.nearlyBlack),
                 label: Text(''),
                 onPressed: () {
                   
                 }),
             FlatButton.icon(
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.notifications, color:  AppTheme.white),
+                icon: Icon(Icons.notifications, color:  AppTheme.nearlyBlack),
                 label: Text(''),
                 onPressed: () {}),
           ],

@@ -18,6 +18,7 @@ dependencies:
   intro_slider: ^2.2.8
   flutter_country_picker: ^0.1.6
   nice_button: ^0.1.7
+  carousel_slider: ^1.4.1
 
 dev_dependencies:
   flutter_test:

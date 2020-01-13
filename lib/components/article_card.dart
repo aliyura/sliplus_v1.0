@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sliplus/components/themes.dart';
+import 'package:sliplus/screens/preview.dart';
 
 class ArticleCard extends StatefulWidget {
   Map<String, dynamic> article;
@@ -11,7 +12,7 @@ class ArticleCard extends StatefulWidget {
 
 class _ArticleCardState extends State<ArticleCard> {
   dynamic id, images, title, body, category, likes, comments, publisgedDat;
-  dynamic uid, name, photo, isAnounymus;
+  dynamic uid, name, photo, location, isAnounymus;
   Map<String, dynamic> article;
 
   @override
@@ -40,7 +41,7 @@ class _ArticleCardState extends State<ArticleCard> {
     uid = article['user']['uid'];
     name = article['user']['name'];
     photo = article['user']['photo'];
-    photo = article['user']['photo'];
+    location = article['user']['location'];
     isAnounymus = article['user']['isAnounymus'];
   }
 
@@ -50,8 +51,9 @@ class _ArticleCardState extends State<ArticleCard> {
     double grid3Width = MediaQuery.of(context).size.width / 3 - 24;
 
     return Container(
-      padding:EdgeInsets.only(top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
-      margin: EdgeInsets.only(top: 15, bottom: 10, left:10,right: 10),
+      padding:
+          EdgeInsets.only(top: 10.0, bottom: 15.0, left: 15.0, right: 15.0),
+      margin: EdgeInsets.only(top: 15, bottom: 10, left: 10, right: 10),
       decoration: BoxDecoration(
           color: AppTheme.white,
           borderRadius: BorderRadius.circular(10.0),
@@ -99,7 +101,7 @@ class _ArticleCardState extends State<ArticleCard> {
                   Icons.location_on,
                   size: 18,
                 ),
-                Text('Lagos, Nigeria'),
+                Text(location),
               ]),
             ),
           ),
@@ -249,7 +251,12 @@ class _ArticleCardState extends State<ArticleCard> {
             height: 10.0,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PreviewScreen(article: article)));
+            },
             child: Text(
               title,
               style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w500),
@@ -266,9 +273,17 @@ class _ArticleCardState extends State<ArticleCard> {
                       height: 10.0,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PreviewScreen(article: article)));
+                      },
                       child: Text(
-                        body,
+                        body.length > 200
+                            ? body.substring(1, 200) + '...'
+                            : body,
                         style: TextStyle(color: AppTheme.darkText),
                       ),
                     )
@@ -284,18 +299,18 @@ class _ArticleCardState extends State<ArticleCard> {
                     alignment: Alignment.centerRight,
                     child: Row(
                       children: <Widget>[
-
-                        Text('$likes',style: TextStyle(
-                          fontWeight: FontWeight.bold
-                        ),), Text('Likes'),
+                        Text(
+                          '$likes',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text('Likes'),
                         SizedBox(width: 20),
-                        
-                        Text('$comments',style: TextStyle(
-                          fontWeight: FontWeight.bold
-                        ),), Text('Comments'),
-
+                        Text(
+                          '$comments',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text('Comments'),
                         SizedBox(width: 10),
-
                         Expanded(
                           child: Icon(
                             Icons.comment,
