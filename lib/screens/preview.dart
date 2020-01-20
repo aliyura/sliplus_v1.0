@@ -18,8 +18,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
   dynamic uid, name, photo, location, isAnounymus;
   final Widget placeholder = Container(color: Colors.grey);
   Map<String, dynamic> article;
-  Color backgroundColor = AppTheme.nearlyBlue;
-  Color fontColor = AppTheme.white;
+  Color backgroundColor = AppTheme.white;
+  Color fontColor = AppTheme.nearlyBlack;
   TextAlign textAlign = TextAlign.justify;
   double fontSize = 16;
   double scroll = 0.0;

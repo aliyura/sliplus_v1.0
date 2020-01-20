@@ -19,6 +19,8 @@ Map<String, dynamic>  userSearchResponse={
   "location": "Abuja, Nigeria",
   "isAnounymus": true
 };
+
+
 Map<String, dynamic>  articleSearchResponse={
    "id": "123",
    "image": 'assets/images/inviteImage.png',
@@ -34,7 +36,7 @@ Map<String, dynamic>  singleArticle={
        "name": "Rabs Developer",
        "photo": "assets/images/avatar.jpg",
        "location": "Abuja, Nigeria",
-       "isAnounymus": true
+       "isAnounymus": false
    },
    "statistic":{
       "likes": '212',
@@ -54,7 +56,7 @@ Map<String, dynamic>  oneArticle={
        "name": "Rabs Developer",
        "photo": "assets/images/avatar.jpg",
        "location": "Abuja, Nigeria",
-       "isAnounymus": true
+       "isAnounymus": false
    },
    "statistic":{
       "likes": '212',
@@ -74,7 +76,7 @@ Map<String, dynamic>  oneArticle={
        "name": "Zainab Umar",
        "photo": "assets/images/avatar.jpg",
        "location": "Abuja, Nigeria",
-       "isAnounymus": true
+       "isAnounymus": false
    },
    "statistic":{
       "likes": '112',
@@ -94,7 +96,7 @@ Map<String, dynamic>  oneArticle={
        "name": "Kehinde Oyenuga",
        "photo": "assets/images/avatar.jpg",
        "location": "Abuja, Nigeria",
-       "isAnounymus": true
+       "isAnounymus": false
    },
    "statistic":{
       "likes": '342',

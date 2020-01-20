@@ -81,7 +81,7 @@ class _ArticleCardState extends State<ArticleCard> {
               ),
               title: SizedBox(
                 child: Row(children: <Widget>[
-                  Text(name,
+                  Text( isAnounymus? 'Anounymus':name,
                       style: TextStyle(
                           color: AppTheme.darkerText,
                           fontSize: 20,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sliplus/components/alert_models.dart';
 import 'package:sliplus/components/drawer.dart';
 import 'package:sliplus/components/themes.dart';
 import 'package:sliplus/models/tab_icons_model.dart';
@@ -57,23 +58,23 @@ class _AppScreenState extends State<AppScreen>
         backgroundColor: AppTheme.background,
         appBar: AppBar(
           backgroundColor: AppTheme.white,
-          iconTheme: IconThemeData(color:  AppTheme.nearlyDarkBlue),
+          iconTheme: IconThemeData(color: AppTheme. HexColor('#3d3d3d')),
       
           title: Text(
             AppTheme.appName,
-            style: TextStyle(color:  AppTheme.nearlyDarkBlue),
+            style: TextStyle(color:  AppTheme. HexColor('#3d3d3d')),
           ),
           actions: <Widget>[
             FlatButton.icon(
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.library_books, color: AppTheme.nearlyDarkBlue),
+                icon: Icon(Icons.library_books, color: AppTheme. HexColor('#3d3d3d')),
                 label: Text(''),
                 onPressed: () {
                   
                 }),
             FlatButton.icon(
                 focusColor: Colors.transparent,
-                icon: Icon(Icons.notifications, color:  AppTheme.nearlyDarkBlue),
+                icon: Icon(Icons.notifications, color:  AppTheme. HexColor('#3d3d3d')),
                 label: Text(''),
                 onPressed: () {}),
           ],
@@ -116,7 +117,7 @@ class _AppScreenState extends State<AppScreen>
           addClick: () {
             setState(() {
                  _unSelectAllTabs();
-                 tabBody =AddStoryScreen();
+                 Modal(context: context).requestStoryTitle('Add story Title');
             });
           },
           changeIndex: (int index) {

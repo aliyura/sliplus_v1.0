@@ -99,7 +99,7 @@ class _CommentsCardState extends State<CommentsCard> {
                             ? SizedBox(height: 10)
                             : Align(
                                 alignment: Alignment.bottomLeft,
-                                child: Image.asset('assets/images/figma.png'),
+                                child: Image.asset('assets/images/figma.png',height: 20,),
                               )
                       ]),
                 ),

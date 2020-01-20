@@ -23,7 +23,6 @@ class _CommentScreenState extends State<CommentScreen> {
     super.initState();
   }
 
-
   _initilizeArticle() {
     article = new Map();
     article = widget.article;
@@ -47,19 +46,27 @@ class _CommentScreenState extends State<CommentScreen> {
       body: Container(
           color: AppTheme.nearlyWhite,
           padding: EdgeInsets.only(bottom: 15),
-          child: ListView(
-            controller: _commentListController,
+          child: Column(
             children: <Widget>[
-              FlatArticleCard(article: article),
               Container(
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height / 2,
-                padding: EdgeInsets.all(15),
-                margin: EdgeInsets.all(15),
-                color: AppTheme.background,
-                child: comments > 0
-                    ? CommentsCard()
-                    : Center(child: Text('No Comments')),
+                 width: double.infinity,
+                 height: MediaQuery.of(context).size.height/1.8,
+                child: ListView(
+                  controller: _commentListController,
+                  children: <Widget>[
+                    FlatArticleCard(article: article),
+                    Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height / 2,
+                      padding: EdgeInsets.all(15),
+                      margin: EdgeInsets.all(15),
+                      color: AppTheme.background,
+                      child: comments > 0
+                          ? CommentsCard()
+                          : Center(child: Text('No Comments')),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 margin: EdgeInsets.all(15),
@@ -84,7 +91,7 @@ class _CommentScreenState extends State<CommentScreen> {
                       padding: const EdgeInsets.only(
                           left: 10, right: 10, top: 0, bottom: 0),
                       child: TextField(
-                        maxLines: 5,
+                        maxLines: 2,
                         maxLength: 1000000,
                         onChanged: (String txt) {},
                         style: TextStyle(

@@ -42,8 +42,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         margin: EdgeInsets.only(left: 150),
                         child: CircleAvatar(
                           backgroundColor: AppTheme.white,
-                          minRadius: 30,
-                          maxRadius: 30,
+                          minRadius: 25,
+                          maxRadius: 25,
                           child: Icon(Icons.photo_camera),
                         ),
                       ),
