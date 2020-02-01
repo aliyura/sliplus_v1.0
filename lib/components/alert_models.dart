@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nice_button/NiceButton.dart';
 import 'package:sliplus/components/themes.dart';
 
 class Modal {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sliplus/authenticate/sign_in.dart';
-import 'package:sliplus/authenticate/sign_up.dart';
 
 class Sign extends StatefulWidget {
   @override

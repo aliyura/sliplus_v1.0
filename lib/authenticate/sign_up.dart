@@ -1,18 +1,42 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sliplus/components/themes.dart';
 
 class SignUp extends StatefulWidget {
+ const  SignUp({Key key, this.data}): super(key: key);
+
+  final String data;
+
   @override
   _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
- 
+  var username;
+
+// get the route params from the previous page using getters
+  get data => widget.data;
+// final String  username;
+ void creatUser(MSISDN) async {
+  //  make an instance of the firestore
+       final db = Firestore.instance;
+      //  get the username and mobile number for posting
+    final  user = {
+        "name":username,
+        'MSISDN':MSISDN
+      };
+
+    CollectionReference  userRef= db.collection('users');
+    await userRef.document(MSISDN).setData(user); 
+     Navigator.of(context).pushNamed('/home');
+     
+} 
    @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(20),
+      body: Form(
+        
+        // padding: EdgeInsets.all(20),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -28,6 +52,10 @@ class _SignUpState extends State<SignUp> {
               TextField(
                 obscureText: false,
                 style: AppTheme.inpuStyle,
+                 onChanged: (value) => {
+                   setState(()=>  username = value),
+                   print(username)
+                 },
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                     hintText: "Full Name",
@@ -35,36 +63,6 @@ class _SignUpState extends State<SignUp> {
                         borderRadius: BorderRadius.circular(32.0))),
               ),
               SizedBox(height: 20),
-              TextField(
-                obscureText: false,
-                style: AppTheme.inpuStyle,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: "Username",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32.0))),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                obscureText: true,
-                style: AppTheme.inpuStyle,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: "New Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32.0))),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                obscureText: true,
-                style: AppTheme.inpuStyle,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                    hintText: "Confirm Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(32.0))),
-              ),
-              SizedBox(height: 30),
               Container(
                   child: Align(
                 alignment: Alignment.centerRight,
@@ -73,10 +71,15 @@ class _SignUpState extends State<SignUp> {
                   child: Icon(Icons.arrow_forward),
                   backgroundColor: AppTheme.nearlyBlue,
                   elevation: 0,
-                  onPressed: () => {},
+                  onPressed: () => {
+                    // print('final pressed'),
+                    // Navigator.of(context).pushNamed('/home'),
+                    creatUser(data)
+                  },
                 ),
               )),
             ]),
+            // onChanged: () => {},
       ),
     );
   }

@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "452498326202",
-    "firebase_url": "https://sliplus.firebaseio.com",
-    "project_id": "sliplus",
-    "storage_bucket": "sliplus.appspot.com"
+    "project_number": "188464488725",
+    "firebase_url": "https://slip-plus-project.firebaseio.com",
+    "project_id": "slip-plus-project",
+    "storage_bucket": "slip-plus-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:452498326202:android:ab09cbc20fffd74bd07883",
+        "mobilesdk_app_id": "1:188464488725:android:a34129aa0735fcf0b4c91c",
         "android_client_info": {
           "package_name": "com.rabsdeveloper.sliplus"
         }
       },
       "oauth_client": [
         {
-          "client_id": "452498326202-pdjbe0v2hocgejtj6r5i8gpbnsrosha9.apps.googleusercontent.com",
+          "client_id": "188464488725-m2v70fcv843g02sjovp9etck0bnjq1bc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBKsAk48HGil4U6EYF4CcqYGvIFVTVdL5g"
+          "current_key": "AIzaSyC6nYj-JEYQLhms6zfEPTDWkTcBi_0SOxg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "452498326202-pdjbe0v2hocgejtj6r5i8gpbnsrosha9.apps.googleusercontent.com",
+              "client_id": "188464488725-m2v70fcv843g02sjovp9etck0bnjq1bc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
